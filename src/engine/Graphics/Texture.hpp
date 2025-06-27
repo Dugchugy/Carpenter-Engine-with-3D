@@ -38,14 +38,22 @@ namespace Engine::Graphics {
     int m_dimensions[2];
     const char* m_filename;
     
+
+    protected:
+
+    /**
+     * @brief sets the underlying texture to match the passed data array
+     *
+     */
+    void setTextureFromSource( void* data, int width, into height )
     
     /**
      * @brief Loads the texture into place if the texture is not already loaded.
      * 
-     * This method is private and is called by GetTexture if the texture is not
+     * This method is protected and is called by GetTexture if the texture is not
      * loaded yet.
      */
-    void LoadTexture();
+    virtual void LoadTexture();
 
     public:
     
