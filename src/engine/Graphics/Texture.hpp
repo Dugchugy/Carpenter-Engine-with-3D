@@ -81,7 +81,33 @@ namespace Engine::Graphics {
     unsigned GetTexture();
 
 
-  };
-};
+  }; // Texture
+
+  class ColorTexture : public Texture {
+  private:
+    unsigned char color[4];
+
+  protected: 
+
+    /**
+     * @brief Loads the texture into place if the texture is not already loaded.
+     * 
+     * This method is protected and is called by GetTexture if the texture is not
+     * loaded yet.
+     */
+    virtual void LoadTexture();
+
+  public:
+
+    /**
+     * @brief creates a color texture with the specified color
+     * @param r red
+     * @param g green
+     * @param b blue
+     */
+    ColorTexture( unsigned char r, unsigned char g, unsigned char b );
+
+  }; // ColorTexture
+}; // Engine::Graphics
 
 #endif 
