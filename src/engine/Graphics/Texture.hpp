@@ -45,7 +45,7 @@ namespace Engine::Graphics {
      * @brief sets the underlying texture to match the passed data array
      *
      */
-    void setTextureFromSource( void* data, int width, into height )
+    void setTextureFromSource( unsigned char* data, int width, int height );
     
     /**
      * @brief Loads the texture into place if the texture is not already loaded.
