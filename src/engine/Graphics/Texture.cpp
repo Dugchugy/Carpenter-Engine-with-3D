@@ -45,6 +45,9 @@ void Engine::Graphics::Texture::LoadTexture() {
 
 void Engine::Graphics::Texture::setTextureFromSource( unsigned char* data, int width, int height ) {
 
+  m_dimensions[0] = width;
+  m_dimensions[1] = height;
+
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -60,4 +63,12 @@ unsigned Engine::Graphics::Texture::GetTexture() {
     LoadTexture();
 
   return m_texture;
+}
+
+Engine::Graphics::ColorTexture::ColorTexture( unsigned char r, unsigned char g, unsigned char b ) {
+  color = { r, g, b, 0xff };
+}
+
+Engine::Graphics::ColorTexture::LoadTexture() {
+  setTextureFromSource( color, 1, 1 );
 }
