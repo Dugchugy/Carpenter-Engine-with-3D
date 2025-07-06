@@ -62,8 +62,8 @@ public:
   AssetStream& operator>>( char& x );
 
   /// @brief extraction operator for vec3s
-  /// pull 12 bytes out of the AssetStream and return them as a Vector3
-  AssetStream& operator>>( Vector3& x );
+  /// pull 12 bytes out of the AssetStream and return them as a Vec3f
+  AssetStream& operator>>( Vec3f& x );
 
   /// @brief extraction operator for strings
   /// extracts one line from the stream. 

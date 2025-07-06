@@ -184,7 +184,7 @@ AssetStream& AssetStream::operator>>( uint8_t& x ) {
   return *this;
 }
 
-AssetStream& AssetStream::operator>>( Vector3& x ) {
+AssetStream& AssetStream::operator>>( Vec3f& x ) {
   float f1, f2, f3;
   *this >> f1 >> f2 >> f3;
 
