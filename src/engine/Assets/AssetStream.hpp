@@ -41,9 +41,15 @@ public:
    */
   const AssetStream& operator=( const AssetStream& a );
 
-  /// @brief takes the underlying void* from the asset
-  /// @return the void* used by this asset stream to store the assets data
-  /// this also sets the pointer in the AssetStream to nullptr ensuring the AssetStream doesn't unexpected free the memory. this moves full responsibility for freeing the memory to the caller of takeAsset, returning the AssetStream to an unopened state
+  /**
+   * @brief takes the asset data from the stream
+   * @return the void* that points to the underlying data
+   * Takes the asset data from the AssetStream.
+   * after this, the asset stream returns to an unopened state and operations that require
+   * the asset data cannot be performed until the asset is opened again.
+   *
+   * after this, the user is responsible for freeing the returned asset data using free( x ) to prevent memory leaks.
+   */
   void* takeAsset();
 
   /// @breif opens the asset stream
