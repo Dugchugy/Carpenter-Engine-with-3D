@@ -14,12 +14,17 @@ public:
   /**
    * @brief Creates an AssetStream to access the asset at the passed path
    * @param path The tath to the Asset this stream will access
-   * Creates a new AssetStream pointing to the specified asset path. Once the asset is opened, bytes can be streamed out of it to be processed by another system.
+   * Creates a new AssetStream pointing to the specified asset path. 
+   * Once the asset is opened, bytes can be streamed out of it to be processed by another system.
    */
   AssetStream( std::string path );
 
-  /// @brief the copy constructor for the Asset stream, copies it's filename and opens a copy of the asset if it is open
-  /// @param a the asset to copy
+  /**
+   * @brief the copy constructor for the Asset stream, copies it's filename and opens a copy of the asset if it is open
+   * @param a the asset to copy
+   * creates a copy of the passed AssetStream. 
+   * all data will be copied including any current asset data, current read position, and whether or not the asset is opened.
+   */
   AssetStream( const AssetStream& a );
 
   /// @brief AssetStream destructor
