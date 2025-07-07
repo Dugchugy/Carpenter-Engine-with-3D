@@ -27,7 +27,9 @@ public:
    */
   AssetStream( const AssetStream& a );
 
-  /// @brief AssetStream destructor
+  /**
+   * @brief AssetStream destructor
+   */
   ~AssetStream();
 
   /// @brief the equals operator
