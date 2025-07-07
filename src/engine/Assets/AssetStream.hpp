@@ -20,7 +20,7 @@ public:
   AssetStream( std::string path );
 
   /**
-   * @brief the copy constructor for the Asset stream, copies it's filename and opens a copy of the asset if it is open
+   * @brief the copy constructor for the Asset stream
    * @param a the asset to copy
    * creates a copy of the passed AssetStream. 
    * all data will be copied including any current asset data, current read position, and whether or not the asset is opened.
@@ -32,8 +32,13 @@ public:
    */
   ~AssetStream();
 
-  /// @brief the equals operator
-  /// sets this AssetStream equal to the passed AssetStream
+  /**
+   * @brief the equals operator
+   * @param a The AssetStream that this AssetStream will be set to.
+   * @returns a const reference to AssetStream a so the operator may be chained.
+   * sets this AssetStream equal to the passed AssetStream
+   * this returns the previous AssetStream allowing the equals operators to be chained
+   */
   const AssetStream& operator=( const AssetStream& a );
 
   /// @brief takes the underlying void* from the asset
