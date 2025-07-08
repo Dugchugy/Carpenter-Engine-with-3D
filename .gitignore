@@ -1,6 +1,9 @@
 .vscode
 .zed
 
+# build results
+bin
+
 # C++ Build Stuff
 
 **/*.o
