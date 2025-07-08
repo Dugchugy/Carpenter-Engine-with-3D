@@ -6,6 +6,8 @@
 #include <cstdint>
 #include <exception>
 
+#include "Utils.hpp"
+
 namespace Engine::Assets {
 
 class AssetStream {
