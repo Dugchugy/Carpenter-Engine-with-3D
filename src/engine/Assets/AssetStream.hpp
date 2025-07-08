@@ -76,8 +76,14 @@ public:
    */
   std::string readUntil( char end );
 
-  /// @brief extraction operator for floats
-  /// pulls 4 bytes out of the AssetStream and returns them as a float
+  /**
+   * @brief Extraction operator for floats
+   * @param x The float to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads 4 bytes out of the Asset stream and uses their value to set the passed float, x.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( float& x );
 
   /// @brief extraction operator for ints
