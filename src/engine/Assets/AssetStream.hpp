@@ -128,9 +128,14 @@ public:
    */
   AssetStream& operator>>( Vec3f& x );
 
-  /// @brief extraction operator for strings
-  /// extracts one line from the stream. 
-  /// extracts bytes one at a time until either the current line ends or the file ends
+  /**
+   * @brief Extraction operator for strings
+   * @param x The string to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads bytes one at a time until either the current line ends or the file ends, then returns the resulting string.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( std::string& x );
 
 private:
