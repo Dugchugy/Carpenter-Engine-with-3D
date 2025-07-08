@@ -68,7 +68,8 @@ public:
    */
   void skipBytes( const int& bytes );
 
-  /** @brief reads bytes until the specified character is read or the file ends.
+  /** 
+   * @brief reads bytes until the specified character is read or the file ends.
    * @param end the character to end the read on
    * Reads bytes as chars adding each one to a string. 
    * Stops and returns the string if the specified character is found or the file ends.
@@ -96,8 +97,14 @@ public:
    */
   AssetStream& operator>>( int& x );
 
-  /// @brief extraction operator for bytes
-  /// pull a byte out of the AssetStream and return it
+  /**
+   * @brief Extraction operator for bytes
+   * @param x The byte to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads a byte out of the Asset stream and sets x to its value.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( uint8_t& x );
 
   /// @brief extraction operator for chars
