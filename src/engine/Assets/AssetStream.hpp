@@ -117,8 +117,15 @@ public:
    */
   AssetStream& operator>>( char& x );
 
-  /// @brief extraction operator for vec3s
-  /// pull 12 bytes out of the AssetStream and return them as a Vec3f
+  /**
+   * @brief Extraction operator for Vec3fs
+   * @param x The Vec3f to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads 12 bytes out of the Asset stream and uses their value to set the passed Vec3f, x.
+   * The twelve bytes are ready as 3 floats in the order x, y, z.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( Vec3f& x );
 
   /// @brief extraction operator for strings
