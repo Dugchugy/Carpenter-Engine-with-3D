@@ -15,6 +15,17 @@ struct TexCoords {
   float v;
 };
 
+/**
+ * @brief Takes a string and splits it on a particular character.
+ * @param str The string to split.
+ * @patam c The character to split it on.
+ * @returns A vector of substrings of str split on c.
+ *
+ * reads through str character by character and adds each string to the vector as it splits them
+ *
+ * ex. str = "hello bob/jill", c = '/'
+ * result: [ "hello bob", "jill" ]
+ */
 std::vector<std::string> splitString( const std::string & str, char c );
 
 Vec3f parseVertex( std::string & line );
