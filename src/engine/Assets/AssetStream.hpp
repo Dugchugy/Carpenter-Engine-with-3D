@@ -13,24 +13,45 @@ namespace Engine::Assets {
 class AssetStream {
 public:
 
-  /// @brief creates an AssetStream to access the asset at the passed path
-  /// @param path the path to the Asset this stream will access
+  /**
+   * @brief Creates an AssetStream to access the asset at the passed path
+   * @param path The tath to the Asset this stream will access
+   * Creates a new AssetStream pointing to the specified asset path. 
+   * Once the asset is opened, bytes can be streamed out of it to be processed by another system.
+   */
   AssetStream( std::string path );
 
-  /// @brief the copy constructor for the Asset stream, copies it's filename and opens a copy of the asset if it is open
-  /// @param a the asset to copy
+  /**
+   * @brief the copy constructor for the Asset stream
+   * @param a the asset to copy
+   * creates a copy of the passed AssetStream. 
+   * all data will be copied including any current asset data, current read position, and whether or not the asset is opened.
+   */
   AssetStream( const AssetStream& a );
 
-  /// @brief AssetStream destructor
+  /**
+   * @brief AssetStream destructor
+   */
   ~AssetStream();
 
-  /// @brief the equals operator
-  /// sets this AssetStream equal to the passed AssetStream
+  /**
+   * @brief the equals operator
+   * @param a The AssetStream that this AssetStream will be set to.
+   * @returns a const reference to AssetStream a so the operator may be chained.
+   * sets this AssetStream equal to the passed AssetStream
+   * this returns the previous AssetStream allowing the equals operators to be chained
+   */
   const AssetStream& operator=( const AssetStream& a );
 
-  /// @brief takes the underlying void* from the asset
-  /// @return the void* used by this asset stream to store the assets data
-  /// this also sets the pointer in the AssetStream to nullptr ensuring the AssetStream doesn't unexpected free the memory. this moves full responsibility for freeing the memory to the caller of takeAsset, returning the AssetStream to an unopened state
+  /**
+   * @brief takes the asset data from the stream
+   * @return the void* that points to the underlying data
+   * Takes the asset data from the AssetStream.
+   * after this, the asset stream returns to an unopened state and operations that require
+   * the asset data cannot be performed until the asset is opened again.
+   *
+   * after this, the user is responsible for freeing the returned asset data using free( x ) to prevent memory leaks.
+   */
   void* takeAsset();
 
   /// @breif opens the asset stream
