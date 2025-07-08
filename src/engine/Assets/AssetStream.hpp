@@ -107,8 +107,14 @@ public:
    */
   AssetStream& operator>>( uint8_t& x );
 
-  /// @brief extraction operator for chars
-  /// pull a byte out of the AssetStream and return it as a char
+  /**
+   * @brief Extraction operator for chars
+   * @param x The char to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads a byte out of the Asset stream and uses its value to set the passed char, x.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( char& x );
 
   /// @brief extraction operator for vec3s
