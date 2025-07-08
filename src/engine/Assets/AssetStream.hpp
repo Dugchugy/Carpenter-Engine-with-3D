@@ -86,8 +86,14 @@ public:
    */
   AssetStream& operator>>( float& x );
 
-  /// @brief extraction operator for ints
-  /// pulls 4 bytes out of the AssetStream and returns them as an int
+  /**
+   * @brief Extraction operator for ints
+   * @param x The int to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads 4 bytes out of the Asset stream and uses their value to set the passed int, x.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( int& x );
 
   /// @brief extraction operator for bytes
