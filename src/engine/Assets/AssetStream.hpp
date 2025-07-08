@@ -61,13 +61,19 @@ public:
    */
   void open();
 
-  /// @brief skips some bytes
-  /// moves the index in the asset forward by bytes.
+  /**
+   * @brief skips the specified number of bytes
+   * @param bytes the number of bytes to skip
+   * Moves the index in the asset forward by bytes.
+   */
   void skipBytes( const int& bytes );
 
-  /// @brief reads bytes until the specified character is read or the file ends.
-  /// @param end the character to end the read on
-  /// the resulting string will not include the specified character
+  /** @brief reads bytes until the specified character is read or the file ends.
+   * @param end the character to end the read on
+   * Reads bytes as chars adding each one to a string. 
+   * Stops and returns the string if the specified character is found or the file ends.
+   * The resulting string will not include the specified character
+   */
   std::string readUntil( char end );
 
   /// @brief extraction operator for floats
