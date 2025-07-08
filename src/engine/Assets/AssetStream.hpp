@@ -54,9 +54,11 @@ public:
    */
   void* takeAsset();
 
-  /// @breif opens the asset stream
-  /// when called, the AssetStream will attempt to open the asset at its path and load it into memory. if unsuccessful it may throw an error
-  /// must be called before reading data from the AssetStream.
+  /**
+   * @breif opens the asset stream
+   * When called, the AssetStream will attempt to open the asset at its path and load it into memory. if unsuccessful it may throw an error
+   * This operation must be called before any data can be read from the asset stream
+   */
   void open();
 
   /// @brief skips some bytes
