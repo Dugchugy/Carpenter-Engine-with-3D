@@ -33,6 +33,6 @@ public:
 
 } //PotionParts
 
-PotionParts::TexCoords operator+( const PotionParts::TexCoords& x, const PotionParts::TexCoords & y );
+Engine::Assets::TexCoords operator+( const Engine::Assets::TexCoords& x, const Engine::Assets::TexCoords & y );
 
 #endif //LOADOBJHELPERS_HPP
