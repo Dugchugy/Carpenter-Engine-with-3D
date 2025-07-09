@@ -94,6 +94,11 @@ namespace Engine {
     Vec3f operator+(const Vec3f& rhs);
 
     /**
+     * @brief Adds two Vec3f objects
+     */
+    Vec3f operator-(const Vec3f& rhs);
+
+    /**
      * @brief Compute scalar multiplication
      */
     Vec3f operator*(const float& rhs);
