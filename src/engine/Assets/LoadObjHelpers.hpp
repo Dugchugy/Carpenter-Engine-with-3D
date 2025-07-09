@@ -1,5 +1,5 @@
-#ifndef LOADOBJHELPERS_HPP
-#define LOADOBJHELPERS_HPP
+#ifndef ENGINE_LOADOBJHELPERS
+#define ENGINE_LOADOBJHELPERS
 
 #include <string>
 #include <vector>
@@ -95,4 +95,4 @@ public:
  */
 Engine::Assets::TexCoords operator+( const Engine::Assets::TexCoords& x, const Engine::Assets::TexCoords & y );
 
-#endif //LOADOBJHELPERS_HPP
+#endif //ENGINE_LOADOBJHELPERS

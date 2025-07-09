@@ -1,5 +1,5 @@
-#ifndef MODEL_HPP
-#define MODEL_HPP
+#ifndef ENGINE_MODEL
+#define ENGINE_MODEL
 
 #include "Transform.hpp"
 #include <Graphics/Mesh.hpp>
@@ -87,4 +87,4 @@ private:
 
 } //PotionParts
 
-#endif //MODEL_HPP
+#endif //ENGINE_MODEL

@@ -1,5 +1,5 @@
-#ifndef LOADEDMESH_HPP
-#define LOADEDMESH_HPP
+#ifndef ENGINE_LOADEDMESH
+#define ENGINE_LOADEDMESH
 
 #include"Graphics/Mesh.hpp"
 #include<vector>
@@ -24,4 +24,4 @@ LoadedMesh loadStlMesh( std::string filename );
 
 }
 
-#endif //LOADEDMESH_HPP
+#endif //ENGINE_LOADEDMESH
