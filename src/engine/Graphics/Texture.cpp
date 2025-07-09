@@ -65,10 +65,17 @@ unsigned Engine::Graphics::Texture::GetTexture() {
   return m_texture;
 }
 
-Engine::Graphics::ColorTexture::ColorTexture( unsigned char r, unsigned char g, unsigned char b ) {
-  color = { r, g, b, 0xff };
+Engine::Graphics::ColorTexture::ColorTexture( 
+    unsigned char r, 
+    unsigned char g, 
+    unsigned char b ) :
+    Texture("Color") {
+  color[0] = r;
+  color[1] = g;
+  color[2] = b;
+  color[3] = 0xff;
 }
 
-Engine::Graphics::ColorTexture::LoadTexture() {
+void Engine::Graphics::ColorTexture::LoadTexture() {
   setTextureFromSource( color, 1, 1 );
 }
