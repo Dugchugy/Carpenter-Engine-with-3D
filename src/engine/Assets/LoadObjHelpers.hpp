@@ -16,6 +16,15 @@ struct TexCoords {
 };
 
 /**
+ * @brief Creates a vertex using a Vec3f and a set of UVs
+ * @param vec The Vec3f that determines the vertexs position
+ * @param uv The TexCoords that determines the vertexs UV values
+ * @returns The new vertex
+ */
+Engine::Graphics::Vertex createVertex( const Engine::Vec3f & vec,
+                                       const TexCoords & uv );
+
+/**
  * @brief Takes a string and splits it on a particular character.
  * @param str The string to split.
  * @patam c The character to split it on.

@@ -4,7 +4,13 @@
 
 using namespace Engine::Assets;
 
-std::vector<std::string> Engine::Assets::splitString( const std::string & str, char c ){
+Engine::Graphics::Vertex Engine::Assets::createVertex( 
+    const Engine::Vec3f & vec,
+    const TexCoords & uv ) {
+  return { vec.x, vec.y, vec.z, uv.u, uv.v };
+}
+
+std::vector<std::string> Engine::Assets::splitString( const std::string & str, char c ) {
   std::vector<std::string> subStrs;
 
   std::string currStr = "";
@@ -23,7 +29,7 @@ std::vector<std::string> Engine::Assets::splitString( const std::string & str, c
   return subStrs;
 }
 
-Vec3f Engine::Assets::parseVertex( std::string & line ) {
+Engine::Vec3f Engine::Assets::parseVertex( std::string & line ) {
   std::vector<std::string> split = splitString( line, ' ' );
 
   if ( split.size() != 4 ) {
@@ -40,7 +46,7 @@ Vec3f Engine::Assets::parseVertex( std::string & line ) {
   float y = stof( split[2], nullptr );
   float z = stof( split[3], nullptr );
 
-  return Vec3f( x, y, z );
+  return { x, y, z };
 }
 
 TexCoords Engine::Assets::parseUV( std::string & line ){
@@ -70,7 +76,7 @@ TexCoords Engine::Assets::parseUV( std::string & line ){
   return { u, v };
 }
 
-Vec3f Engine::Assets::parseNormal( std::string & line ) {
+Engine::Vec3f Engine::Assets::parseNormal( std::string & line ) {
   std::vector<std::string> split = splitString( line, ' ' );
 
   if ( split.size() != 4 ) {
@@ -87,7 +93,7 @@ Vec3f Engine::Assets::parseNormal( std::string & line ) {
   float y = stof( split[2], nullptr );
   float z = stof( split[3], nullptr );
 
-  return Vec3f( x, y, z );
+  return { x, y, z };
 }
 
 std::vector<Tri> Engine::Assets::parseFace( std::string & line, const std::vector<Vec3f> & vertexes,
@@ -110,7 +116,7 @@ std::vector<Tri> Engine::Assets::parseFace( std::string & line, const std::vecto
   std::vector<Vec3f> faceVertexes;
   std::vector<TexCoords> faceUvs;
 
-  Vec3f avgVert = Vec3f( 0, 0, 0 );
+  Engine::Vec3f avgVert = { 0, 0, 0 };
   TexCoords avgTex = { 0, 0 };
 
   for ( int i = 1; i < split.size(); i++ ) {
@@ -133,36 +139,36 @@ std::vector<Tri> Engine::Assets::parseFace( std::string & line, const std::vecto
 
   if ( split.size() == 4 ) {
     result.push_back( {
-      faceVertexes[ 0 ].toVertex( faceUvs[ 0 ].u, faceUvs[ 0 ].v ),
-      faceVertexes[ 1 ].toVertex( faceUvs[ 1 ].u, faceUvs[ 1 ].v ),
-      faceVertexes[ 2 ].toVertex( faceUvs[ 2 ].u, faceUvs[ 2 ].v )
+      createVertex( faceVertexes[ 0 ], faceUvs[ 0 ] ),
+      createVertex( faceVertexes[ 1 ], faceUvs[ 1 ] ),
+      createVertex( faceVertexes[ 2 ], faceUvs[ 2 ] )
     } );
   } else if ( split.size() == 5 ) {
     // adds a quad (4 vertices)
     result.push_back( {
-      faceVertexes[ 0 ].toVertex( faceUvs[ 0 ].u, faceUvs[ 0 ].v ),
-      faceVertexes[ 1 ].toVertex( faceUvs[ 1 ].u, faceUvs[ 1 ].v ),
-      faceVertexes[ 2 ].toVertex( faceUvs[ 2 ].u, faceUvs[ 2 ].v )
+      createVertex( faceVertexes[ 0 ], faceUvs[ 0 ] ),
+      createVertex( faceVertexes[ 1 ], faceUvs[ 1 ] ),
+      createVertex( faceVertexes[ 2 ], faceUvs[ 2 ] )
     } );
     result.push_back( {
-      faceVertexes[ 2 ].toVertex( faceUvs[ 2 ].u, faceUvs[ 2 ].v ),
-      faceVertexes[ 3 ].toVertex( faceUvs[ 3 ].u, faceUvs[ 3 ].v ),
-      faceVertexes[ 0 ].toVertex( faceUvs[ 0 ].u, faceUvs[ 0 ].v )
+      createVertex( faceVertexes[ 2 ], faceUvs[ 2 ] ),
+      createVertex( faceVertexes[ 3 ], faceUvs[ 3 ] ),
+      createVertex( faceVertexes[ 0 ], faceUvs[ 0 ] )
     } );
   } else {
     //uses the calculated average vertex as a middle point for a face
     for ( int i = 1; i < split.size(); i++ ) {
       if ( i == ( split.size() - 1 ) ) {
         result.push_back( {
-          faceVertexes[ i - 1 ].toVertex( faceUvs[ i - 1 ].u, faceUvs[ i - 1 ].v ),
-          faceVertexes[ 0 ].toVertex( faceUvs[ 0 ].u, faceUvs[ 0 ].v ),
-          avgVert.toVertex( avgTex.u, avgTex.v )
+          createVertex( faceVertexes[ i - 1 ], faceUvs[ i - 1 ] ),
+          createVertex( faceVertexes[ 0 ], faceUvs[ 0 ] ),
+          createVertex( avgVert, avgTex )
         } );
       } else {
         result.push_back( {
-          faceVertexes[ i - 1 ].toVertex( faceUvs[ i - 1 ].u, faceUvs[ i - 1 ].v ),
-          faceVertexes[ i ].toVertex( faceUvs[ i ].u, faceUvs[ i ].v ),
-          avgVert.toVertex( avgTex.u, avgTex.v )
+          createVertex( faceVertexes[ i - 1 ], faceUvs[ i - 1 ] ),
+          createVertex( faceVertexes[ i ], faceUvs[ i ] ),
+          createVertex( avgVert, avgTex )
         } );
       }
     }
