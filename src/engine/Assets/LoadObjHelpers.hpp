@@ -28,12 +28,46 @@ struct TexCoords {
  */
 std::vector<std::string> splitString( const std::string & str, char c );
 
+/**
+ * @brief parses a vertex line from an obj file
+ * @param line the line the vertex is parsed from
+ * @returns the vertex that was read from the line
+ * 
+ * Used for reading .OBJ files. 
+ * It will throw an error if the line isn't formatted correctly
+ */
 Vec3f parseVertex( std::string & line );
 
+/**
+ * @brief parses a UV line from an obj file
+ * @param line the line the UV is parsed from
+ * @returns the UV coords that were read from the line
+ * 
+ * Used for reading .OBJ files. 
+ * It will throw an error if the line isn't formatted correctly
+ */
 TexCoords parseUV( std::string & line );
 
+/**
+ * @brief parses a normal vector line from an obj file
+ * @param line the line the normal vector is parsed from
+ * @returns the normal vector that was read from the line
+ * 
+ * Used for reading .OBJ files. 
+ * It will throw an error if the line isn't formatted correctly
+ */
 Vec3f parseNormal( std::string & line );
 
+/**
+ * @brief parses a face line from an obj file
+ * @param line the line the face is parsed from
+ * @param vertexes the collection of vertexes that the face will reference
+ * @param uVs the collection of UV coordinates that the face will reference
+ * @returns the collection of triangles that make up the face
+ * 
+ * Used for reading .OBJ files. 
+ * It will throw an error if the line isn't formatted correctly
+ */
 std::vector<Tri> parseFace( std::string & line, const std::vector<Vec3f> & vertexes, const std::vector<TexCoords> & uVs );
 
 class InvalidLineException : public std::exception {
@@ -43,6 +77,7 @@ public:
 }; //InvalidLineException 
 
 } //PotionParts
+
 
 Engine::Assets::TexCoords operator+( const Engine::Assets::TexCoords& x, const Engine::Assets::TexCoords & y );
 
