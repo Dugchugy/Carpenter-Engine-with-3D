@@ -54,43 +54,88 @@ public:
    */
   void* takeAsset();
 
-  /// @breif opens the asset stream
-  /// when called, the AssetStream will attempt to open the asset at its path and load it into memory. if unsuccessful it may throw an error
-  /// must be called before reading data from the AssetStream.
+  /**
+   * @breif opens the asset stream
+   * When called, the AssetStream will attempt to open the asset at its path and load it into memory. if unsuccessful it may throw an error
+   * This operation must be called before any data can be read from the asset stream
+   */
   void open();
 
-  /// @brief skips some bytes
-  /// moves the index in the asset forward by bytes.
+  /**
+   * @brief skips the specified number of bytes
+   * @param bytes the number of bytes to skip
+   * Moves the index in the asset forward by bytes.
+   */
   void skipBytes( const int& bytes );
 
-  /// @brief reads bytes until the specified character is read or the file ends.
-  /// @param end the character to end the read on
-  /// the resulting string will not include the specified character
+  /** 
+   * @brief reads bytes until the specified character is read or the file ends.
+   * @param end the character to end the read on
+   * Reads bytes as chars adding each one to a string. 
+   * Stops and returns the string if the specified character is found or the file ends.
+   * The resulting string will not include the specified character
+   */
   std::string readUntil( char end );
 
-  /// @brief extraction operator for floats
-  /// pulls 4 bytes out of the AssetStream and returns them as a float
+  /**
+   * @brief Extraction operator for floats
+   * @param x The float to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads 4 bytes out of the Asset stream and uses their value to set the passed float, x.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( float& x );
 
-  /// @brief extraction operator for ints
-  /// pulls 4 bytes out of the AssetStream and returns them as an int
+  /**
+   * @brief Extraction operator for ints
+   * @param x The int to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads 4 bytes out of the Asset stream and uses their value to set the passed int, x.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( int& x );
 
-  /// @brief extraction operator for bytes
-  /// pull a byte out of the AssetStream and return it
+  /**
+   * @brief Extraction operator for bytes
+   * @param x The byte to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads a byte out of the Asset stream and sets x to its value.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( uint8_t& x );
 
-  /// @brief extraction operator for chars
-  /// pull a byte out of the AssetStream and return it as a char
+  /**
+   * @brief Extraction operator for chars
+   * @param x The char to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads a byte out of the Asset stream and uses its value to set the passed char, x.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( char& x );
 
-  /// @brief extraction operator for vec3s
-  /// pull 12 bytes out of the AssetStream and return them as a Vec3f
+  /**
+   * @brief Extraction operator for Vec3fs
+   * @param x The Vec3f to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads 12 bytes out of the Asset stream and uses their value to set the passed Vec3f, x.
+   * The twelve bytes are ready as 3 floats in the order x, y, z.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( Vec3f& x );
 
-  /// @brief extraction operator for strings
-  /// extracts one line from the stream. 
-  /// extracts bytes one at a time until either the current line ends or the file ends
+  /**
+   * @brief Extraction operator for strings
+   * @param x The string to write the data into.
+   * @returns A reference to the AssetStream so extractions can be chained
+   * Reads bytes one at a time until either the current line ends or the file ends, then returns the resulting string.
+   *
+   * can be chained.
+   */
   AssetStream& operator>>( std::string& x );
 
 private:
