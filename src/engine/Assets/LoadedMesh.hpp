@@ -4,7 +4,7 @@
 #include"Graphics/Mesh.hpp"
 #include<vector>
 
-namespace PotionParts {
+namespace Engine::Assets {
 
 struct Tri {
   Engine::Graphics::Vertex v1;

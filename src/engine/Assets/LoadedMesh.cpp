@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-using namespace PotionParts;
+using namespace Engine::Assets;
 
 LoadedMesh::LoadedMesh( std::vector<Tri> triangles ) {
   for ( int i = 0; i < triangles.size(); i++ ) {
