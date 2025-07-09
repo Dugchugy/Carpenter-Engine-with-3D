@@ -78,7 +78,12 @@ public:
 
 } //PotionParts
 
-
+/**
+ * @brief addition operator for TexCoords
+ * @param x a TexCoord to add
+ * @param y a TexCoord to add
+ * @returns the piecewise sum of x and y
+ */
 Engine::Assets::TexCoords operator+( const Engine::Assets::TexCoords& x, const Engine::Assets::TexCoords & y );
 
 #endif //LOADOBJHELPERS_HPP
