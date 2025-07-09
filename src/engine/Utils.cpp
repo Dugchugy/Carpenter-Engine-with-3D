@@ -49,6 +49,13 @@ bool Engine::Vec3f::operator==(const Engine::Vec3f& rhs) {
   return x == rhs.x && y == rhs.y && z == rhs.z;
 }
 
+Engine::Vec3f Engine::Cross( const Engine::Vec3f & lhs, 
+                             const Engine::Vec3f & rhs ) {
+  return { lhs.y*rhs.z - lhs.z*rhs.y, 
+           lhs.z*rhs.x - lhs.x*rhs.z,
+           lhs.x*rhs.y - lhs.y*rhs.x };
+}
+
 // Vector Rotations
 
 Engine::Vec2f Engine::Rotate(Vec2f v, float angle) {

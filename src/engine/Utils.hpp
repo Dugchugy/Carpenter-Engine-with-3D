@@ -94,7 +94,7 @@ namespace Engine {
     Vec3f operator+(const Vec3f& rhs);
 
     /**
-     * @brief Adds two Vec3f objects
+     * @brief subtracts two Vec3f objects
      */
     Vec3f operator-(const Vec3f& rhs);
 
@@ -115,6 +115,11 @@ namespace Engine {
 
     bool operator==(const Vec3f& rhs);
   };
+
+  /**
+   * @brief computes the cross product of two Vec3fs
+   */
+  Vec3f Cross( const Vec3f & lhs, const Vec3f & rhs );
 
   /**
    * @brief A color struct with 4 components: RGBA
