@@ -45,11 +45,18 @@ float Engine::Vec3f::lengthSquared() {
   return x * x + y * y + z * z;
 }
 
+void Engine::Vec3f::normalize() {
+  float len = lengthSquared();
+  x = x / len;
+  y = y / len;
+  z = z / len;
+}
+
 bool Engine::Vec3f::operator==(const Engine::Vec3f& rhs) {
   return x == rhs.x && y == rhs.y && z == rhs.z;
 }
 
-Engine::Vec3f Engine::Cross( const Engine::Vec3f & lhs, 
+Engine::Vec3f Engine::cross( const Engine::Vec3f & lhs, 
                              const Engine::Vec3f & rhs ) {
   return { lhs.y*rhs.z - lhs.z*rhs.y, 
            lhs.z*rhs.x - lhs.x*rhs.z,

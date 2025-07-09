@@ -113,13 +113,20 @@ namespace Engine {
      */
     float lengthSquared();
 
+    /**
+     * @brief changes the vector to have a length of one
+     * 
+     * dvides x, y, and z by the vectors length
+     */
+    void normalize();
+
     bool operator==(const Vec3f& rhs);
   };
 
   /**
    * @brief computes the cross product of two Vec3fs
    */
-  Vec3f Cross( const Vec3f & lhs, const Vec3f & rhs );
+  Vec3f cross( const Vec3f & lhs, const Vec3f & rhs );
 
   /**
    * @brief A color struct with 4 components: RGBA
