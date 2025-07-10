@@ -6,6 +6,7 @@
 #include <exception>
 
 #include "LoadedMesh.hpp"
+#include "utils.hpp"
 
 namespace Engine::Assets {
 
@@ -78,6 +79,16 @@ Vec3f parseNormal( std::string & line );
  * It will throw an error if the line isn't formatted correctly
  */
 std::vector<Tri> parseFace( std::string & line, const std::vector<Vec3f> & vertexes, const std::vector<TexCoords> & uVs );
+
+/**
+ * @brief parses a color from a diffuse lighting line
+ * @param line the diffuse lighting line to parse
+ * @returns a color with r, g, and b specified by the diffuse color.
+ * 
+ * Used to parse the kd lines in a MTL file. 
+ * The opacity ( `a` ) of the returned line is always `0xff`
+ */
+Engine::Color parseDiffuse( std::string line );
 
 class InvalidLineException : public std::exception {
 public:
