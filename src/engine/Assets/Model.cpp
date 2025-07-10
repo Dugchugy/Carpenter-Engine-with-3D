@@ -35,7 +35,8 @@ void Model::draw( Engine::Graphics::Renderer& renderer,
 Model Engine::Assets::loadStlModel( std::string filename ) {
 
   LoadedMesh mesh = loadStlMesh( filename );
-  Engine::Graphics::Texture text( "Assets/Placeholder.png" );
+  // uses a plain gray texture
+  Engine::Graphics::ColorTexture text( 128, 128, 128 );
 
   return Model( mesh, text );
 }
