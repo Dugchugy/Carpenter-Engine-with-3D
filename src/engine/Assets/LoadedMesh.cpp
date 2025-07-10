@@ -39,11 +39,11 @@ LoadedMesh Engine::Assets::loadStlMesh( std::string filename ) {
 
     if( ( normal - calcNorm ).lengthSquared() < 0.001f ) {
       triangles.push_back( { { v1.x, v1.y, v1.x, 0, 0 },
-                             { v2.x, v2.y, v2.z, 0.5, 0 },
+                             { v2.x, v2.y, v2.z, 1, 0 },
                              { v3.x, v3.y, v3.x, 1, 1 } } );
     } else {
       triangles.push_back( { { v3.x, v3.y, v3.x, 1, 1 },
-                             { v2.x, v2.y, v2.z, 0.5, 0 },
+                             { v2.x, v2.y, v2.z, 1, 0 },
                              { v1.x, v1.y, v1.x, 0, 0 } } );
     }
 
