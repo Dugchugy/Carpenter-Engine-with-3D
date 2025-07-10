@@ -85,7 +85,7 @@ namespace Engine::Graphics {
 
   class ColorTexture : public Texture {
   private:
-    unsigned char color[4];
+    Color color;
 
   protected: 
 
@@ -101,11 +101,9 @@ namespace Engine::Graphics {
 
     /**
      * @brief creates a color texture with the specified color
-     * @param r red
-     * @param g green
-     * @param b blue
+     * @param c the color to use
      */
-    ColorTexture( unsigned char r, unsigned char g, unsigned char b );
+    ColorTexture( color c );
 
   }; // ColorTexture
 }; // Engine::Graphics
