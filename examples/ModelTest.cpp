@@ -31,7 +31,7 @@ class ExampleScene : public Scene {
 
     stlTest.draw( Game::getInstance().GetRenderer(), 
                   { 1, 0, 10 },
-                  { 0, time, 0 },
+                  { 90, time, 0 },
                   { 1, 1, 1 } );
     objTest.draw( Game::getInstance().GetRenderer(), 
                   { -1, 0, 10 },
