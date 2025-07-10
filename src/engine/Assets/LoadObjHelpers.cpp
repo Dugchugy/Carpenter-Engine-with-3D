@@ -177,6 +177,21 @@ std::vector<Tri> Engine::Assets::parseFace( std::string & line, const std::vecto
   return result;
 }
 
+Engine::Color Engine::Assets::parseDiffuse( std::string line ) {
+  std::vector<std::string> split = splitString( line, ' ' );
+
+  if ( split.size() != 4 || split[ 0 ] != "kd" ) {
+    std::cout << "invalid line " << line << "\n";
+    throw InvalidLineException;
+  }
+
+  Engine::Color c = { 0xff, 0xff, 0xff, 0xff };
+  c.r = c.r * stof( split[ 1 ], nullptr );
+  c.g = c.g * stof( split[ 2 ], nullptr );
+  c.b = c.b * stof( split[ 3 ], nullptr );
+  return c;
+}
+
 TexCoords operator+( const TexCoords & x, const TexCoords & y ) {
   return { x.u + y.u, x.v + y.v };
 }
