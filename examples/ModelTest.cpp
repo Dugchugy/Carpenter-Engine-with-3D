@@ -7,28 +7,36 @@
 #include <Game.hpp>
 #include <UI/UILabel.hpp>
 #include <Graphics/Shapes.hpp>
+#include <Assets/Model.hpp>
 
 using namespace Engine;
 
 class ExampleScene : public Scene {
   private:
-  Graphics::Cube mesh;
-  Graphics::Texture texture;
   float time = 0;
   UI::UILabel label;
-
+  Assets::Model stlTest;
+  Assets::Model objTest;
   public:
-  ExampleScene() : Scene("ExampleScene"), texture("Assets/placeholder.png"),
-  label("Label", "Model Test") {
+  ExampleScene() : 
+      Scene("ExampleScene"),
+      label("Label", "Model Test") {
     AddChild(&label);
+    stlTest = Assets::loadStlModel( "Assets/test-monkey.stl" );
+    objTest = Assets::loadObjModel( "Assets/test-monkey.obj" );
   }
 
   void Draw() override {
     Scene::Draw();
 
-    Game::getInstance().GetRenderer().UseTexture(texture, GL_TEXTURE0);
-    Game::getInstance().GetRenderer().DrawMesh(&mesh, {0, 0, 10}, {1, 1, 1},
-      {-35, time, 0});
+    stlTest.draw( Game::getInstance().GetRenderer(), 
+                  { 1, 0, 10 },
+                  { 0, time, 0 },
+                  { 1, 1, 1 } );
+    objTest.draw( Game::getInstance().GetRenderer(), 
+                  { -1, 0, 10 },
+                  { 0, time, 0 },
+                  { 1, 1, 1 } );
   }
 
   void Update(float dt) override {
