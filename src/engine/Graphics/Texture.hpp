@@ -85,7 +85,7 @@ namespace Engine::Graphics {
 
   class ColorTexture : public Texture {
   private:
-    Color color;
+    Engine::Color color;
 
   protected: 
 
@@ -103,7 +103,7 @@ namespace Engine::Graphics {
      * @brief creates a color texture with the specified color
      * @param c the color to use
      */
-    ColorTexture( color c );
+    ColorTexture( Engine::Color c );
 
   }; // ColorTexture
 }; // Engine::Graphics

@@ -69,5 +69,5 @@ Engine::Graphics::ColorTexture::ColorTexture( Color c ) :
     Texture( "Color" ), color( c ) {}
 
 void Engine::Graphics::ColorTexture::LoadTexture() {
-  setTextureFromSource( color, 1, 1 );
+  setTextureFromSource( (unsigned char *) &color, 1, 1 );
 }
