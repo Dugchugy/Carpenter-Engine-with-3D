@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <exception>
+#include <unordered_map>
 
 #include "LoadedMesh.hpp"
 #include "utils.hpp"
@@ -99,13 +100,22 @@ Engine::Color parseDiffuse( std::string line );
  */
 float parseOpacity( std::string line );
 
+/**
+ * @brief loads all of the textures from a MTL file
+ * @param filename the name of the MTL file to load
+ * @returns a hash map mapping the names of the materials in the MTL file to a texture
+ *
+ * loads all of the materials out of an MTL file.
+ */
+std::unordered_map<std::string, Engine:: Graphics::Texture> parseMtlFile( std::string filename )
+
 class InvalidLineException : public std::exception {
 public:
   virtual const char* what() const throw();
 
 }; //InvalidLineException 
 
-} //PotionParts
+} //Engine::Assets
 
 /**
  * @brief addition operator for TexCoords
