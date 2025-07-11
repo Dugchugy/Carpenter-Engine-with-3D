@@ -8,7 +8,10 @@
 
 namespace Engine::Assets {
 
-/// @brief stores both a mesh and a texture to be used for rendering a model. model itself references the model base to determine its rendering process
+/**
+ * A model with a collection of meshes and textures.
+ * Used to simplify rendering of 3D models
+ */
 class Model {
 
 private:
