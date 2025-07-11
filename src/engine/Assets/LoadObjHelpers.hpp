@@ -90,6 +90,15 @@ std::vector<Tri> parseFace( std::string & line, const std::vector<Vec3f> & verte
  */
 Engine::Color parseDiffuse( std::string line );
 
+/**
+ * @brief parses a float from an opacity line
+ * @param line the opacity line to parse
+ * @returns a float specifying the opacity of the material
+ *
+ * Used to parse the d lines in a MTL file.
+ */
+float parseOpacity( std::string line );
+
 class InvalidLineException : public std::exception {
 public:
   virtual const char* what() const throw();
