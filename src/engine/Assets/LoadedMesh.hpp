@@ -15,7 +15,10 @@ struct Tri {
 class LoadedMesh : public Engine::Graphics::Mesh {
 public:
 
-  /// @brief creates a mesh from an array of triangles
+  /**
+   * @brief Creates a mesh from an array of triangles.
+   * @param triangles The array of triangles that specifies all the faces of the mesh
+   */
   LoadedMesh( std::vector<Tri> triangles );
 
 }; //LoadedMesh
