@@ -25,6 +25,11 @@ private:
   
 public:
 
+  /**
+   * @brief constructs an empty model
+   * 
+   * creates a model with no meshes and no textures. 
+   */
   Model();
 
   Model( Engine::Graphics::Mesh m, Engine::Graphics::Texture t );
