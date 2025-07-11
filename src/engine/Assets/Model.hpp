@@ -26,12 +26,19 @@ private:
 public:
 
   /**
-   * @brief constructs an empty model
+   * @brief Constructs an empty model.
    * 
-   * creates a model with no meshes and no textures. 
+   * Creates a model with no meshes and no textures. 
    */
   Model();
 
+  /**
+   * @breif Constructs a model from a mesh and a texture
+   * @param m The mesh to use for this model
+   * @param t The texture to use for this model
+   * 
+   * creates a new model that contains a single mesh and a single texture.
+   */
   Model( Engine::Graphics::Mesh m, Engine::Graphics::Texture t );
 
   void addMesh( Engine::Graphics::Mesh m, Engine::Graphics::Texture t );
