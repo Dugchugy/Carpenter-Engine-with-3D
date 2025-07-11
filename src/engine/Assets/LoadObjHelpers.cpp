@@ -182,7 +182,7 @@ Engine::Color Engine::Assets::parseDiffuse( std::string line ) {
 
   if ( split.size() != 4 || split[ 0 ] != "kd" ) {
     std::cout << "invalid line " << line << "\n";
-    throw InvalidLineException;
+    throw InvalidLineException();
   }
 
   Engine::Color c = { 0xff, 0xff, 0xff, 0xff };

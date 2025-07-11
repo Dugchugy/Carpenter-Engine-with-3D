@@ -7,7 +7,8 @@
 #include <unordered_map>
 
 #include "LoadedMesh.hpp"
-#include "utils.hpp"
+#include "Utils.hpp"
+#include "Graphics/Texture.hpp"
 
 namespace Engine::Assets {
 
@@ -107,7 +108,7 @@ float parseOpacity( std::string line );
  *
  * loads all of the materials out of an MTL file.
  */
-std::unordered_map<std::string, Engine:: Graphics::Texture> parseMtlFile( std::string filename )
+std::unordered_map<std::string, Engine:: Graphics::Texture> parseMtlFile( std::string filename );
 
 class InvalidLineException : public std::exception {
 public:
