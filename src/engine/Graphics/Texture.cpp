@@ -17,9 +17,6 @@ Engine::Graphics::Texture::Texture(const char* path) {
 }
 
 void Engine::Graphics::Texture::LoadTexture() {
-  glGenTextures(1, &m_texture);
-  glBindTexture(GL_TEXTURE_2D, m_texture);
-
   unsigned char* data;
   int size;
 
@@ -44,6 +41,8 @@ void Engine::Graphics::Texture::LoadTexture() {
 }
 
 void Engine::Graphics::Texture::setTextureFromSource( unsigned char* data, int width, int height ) {
+  glGenTextures(1, &m_texture);
+  glBindTexture(GL_TEXTURE_2D, m_texture);
 
   m_dimensions[0] = width;
   m_dimensions[1] = height;
@@ -66,8 +65,6 @@ unsigned Engine::Graphics::Texture::GetTexture() {
 }
 
 Engine::Graphics::ColorTexture::ColorTexture( Color c ) :
-    Texture( "Color" ), color( c ) {}
-
-void Engine::Graphics::ColorTexture::LoadTexture() {
+    Texture( "Color" ), color( c ) {
   setTextureFromSource( (unsigned char *) &color, 1, 1 );
 }

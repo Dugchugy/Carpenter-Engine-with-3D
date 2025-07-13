@@ -53,7 +53,7 @@ namespace Engine::Graphics {
      * This method is protected and is called by GetTexture if the texture is not
      * loaded yet.
      */
-    virtual void LoadTexture();
+    void LoadTexture();
 
     public:
     
@@ -86,17 +86,7 @@ namespace Engine::Graphics {
   class ColorTexture : public Texture {
   private:
     Engine::Color color;
-
-  protected: 
-
-    /**
-     * @brief Loads the texture into place if the texture is not already loaded.
-     * 
-     * This method is protected and is called by GetTexture if the texture is not
-     * loaded yet.
-     */
-    virtual void LoadTexture();
-
+    
   public:
 
     /**
