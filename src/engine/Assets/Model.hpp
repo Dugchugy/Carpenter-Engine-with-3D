@@ -48,7 +48,13 @@ public:
    */
   void addMesh( Engine::Graphics::Mesh m, Engine::Graphics::Texture t );
 
-  /// @brief draws this mesh using the given renderer and transform
+  /**
+   * @brief draws this mesh using the given renderer and transform
+   * @param renderer the renderer to render this model with
+   * @param position the position to render this model
+   * @param rotation the rotation to render this model with 
+   * @param scale the scale to render this model with
+   */
   void draw( Engine::Graphics::Renderer& renderer,
              const Engine::Vec3f & position,
              const Engine::Vec3f & rotation,
@@ -56,9 +62,10 @@ public:
 
 }; //Model
 
-/// @brief loads an STL model from the passed filename
-/// @param filename the path to the STL file. must end in '.stl'
-/// checks the internal cache before loading the file and only loads it if it hasn't been loaded before
+/**
+ * @brief loads an STL model from the passed filename
+ * @param filename the path to the STL file. must end in '.stl'
+ */
 Model loadStlModel( std::string filename );
 
 /// @brief loads a cube mesh with the appropriate texture
