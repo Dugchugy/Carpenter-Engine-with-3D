@@ -65,19 +65,24 @@ public:
 /**
  * @brief loads an STL model from the passed filename
  * @param filename the path to the STL file. must end in '.stl'
+ * @return a model containing the loaded STL model with a plain grey texture
  */
 Model loadStlModel( std::string filename );
 
-/// @brief loads a cube mesh with the appropriate texture
-/// @param textFilename the path to the PNG texture. must be a PNG file
-/// checks the internal cache before loading the file and only loads it if it hasn't been loaded before
+/**
+ * @brief loads a cube mesh with the appropriate texture
+ * @param textFilename the path to the PNG texture. must be a PNG file
+ * @return a model containing a cube mesh with the loaded texture
+ */
 Model loadCube( char* textFilename );
 
-/// @brief loads an OBJ model from the passed filename
-/// @param filename the the path to the .obj file
-/// @return the model read from the file
-/// checks the internal cache before loading the file and only loads it if it hasn't been loaded before
-/// also loads any .mtl files required by the .obj file as well as any textures
+/**
+ * @brief loads an OBJ model from the passed filename
+ * @param filename the the path to the .obj file
+ * @return the obj model with any textures specified in the MTL file
+ * 
+ * also loads any .mtl files required by the .obj file as well as any textures they reference
+ */
 Model loadObjModel( std::string filename );
 
 } //Engine::Assets
