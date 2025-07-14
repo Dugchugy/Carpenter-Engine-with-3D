@@ -41,6 +41,11 @@ public:
    */
   Model( Engine::Graphics::Mesh m, Engine::Graphics::Texture t );
 
+  /**
+   * @brief adds a mesh and texture pair to the model
+   * @param m the mesh to add to the model
+   * @param t the texture used for this model
+   */
   void addMesh( Engine::Graphics::Mesh m, Engine::Graphics::Texture t );
 
   /// @brief draws this mesh using the given renderer and transform
