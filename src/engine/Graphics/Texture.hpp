@@ -35,11 +35,13 @@ namespace Engine::Graphics {
   class Texture {
     private:
     unsigned int m_texture = -1;
-    int m_dimensions[2];
     const char* m_filename;
-    
 
     protected:
+
+    unsigned char* textureData = nullptr;
+    int m_dimensions[2];
+    bool isSTBI = false;
 
     /**
      * @brief sets the underlying texture to match the passed data array
@@ -54,6 +56,8 @@ namespace Engine::Graphics {
      * loaded yet.
      */
     void LoadTexture();
+
+    virtual void LoadTextureArray();
 
     public:
     
@@ -86,7 +90,10 @@ namespace Engine::Graphics {
   class ColorTexture : public Texture {
   private:
     Engine::Color color;
-    
+
+  protected:
+    virtual void LoadTextureArray();
+
   public:
 
     /**
