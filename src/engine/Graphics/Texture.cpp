@@ -21,6 +21,8 @@ void Engine::Graphics::Texture::LoadTexture() {
     LoadTextureArray();
   }
   
+  std::cout << (short) textureData[0] << " " << (short) textureData[1] << " " <<
+               (short) textureData[2] << " " << (short) textureData[3] << "\n";
   setTextureFromSource( textureData, m_dimensions[ 0 ], m_dimensions[ 1 ] );
 
   if ( isSTBI ) {
@@ -73,9 +75,11 @@ unsigned Engine::Graphics::Texture::GetTexture() {
 
 Engine::Graphics::ColorTexture::ColorTexture( Color c ) :
     Texture( "Color" ), color( c ) {
-  textureData = (unsigned char*) malloc( 16 );
+  unsigned int imageSize = 1024;
 
-  for ( int i = 0; i < 4; i++ ) {
+  textureData = (unsigned char*) malloc( ( imageSize * imageSize ) * 4 );
+
+  for ( int i = 0; i < ( imageSize * imageSize ); i++ ) {
     textureData[ 4*i ] = color.r;
     textureData[ 4*i + 1 ] = color.g;
     textureData[ 4*i + 2 ] = color.b;
@@ -84,8 +88,8 @@ Engine::Graphics::ColorTexture::ColorTexture( Color c ) :
 
   isSTBI = false;
 
-  m_dimensions[ 0 ] = 1;
-  m_dimensions[ 1 ] = 1;
+  m_dimensions[ 0 ] = imageSize;
+  m_dimensions[ 1 ] = imageSize;
 }
 
 void Engine::Graphics::ColorTexture::LoadTextureArray() {}

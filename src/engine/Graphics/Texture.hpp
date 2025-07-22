@@ -92,6 +92,9 @@ namespace Engine::Graphics {
     Engine::Color color;
 
   protected:
+    /**
+     * @brief does nothing. overloads previous implementation 
+     */
     virtual void LoadTextureArray();
 
   public:
