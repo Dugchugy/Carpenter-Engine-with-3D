@@ -41,9 +41,20 @@ public:
    */
   Model( Engine::Graphics::Mesh m, Engine::Graphics::Texture t );
 
+  /**
+   * @brief adds a mesh and texture pair to the model
+   * @param m the mesh to add to the model
+   * @param t the texture used for this model
+   */
   void addMesh( Engine::Graphics::Mesh m, Engine::Graphics::Texture t );
 
-  /// @brief draws this mesh using the given renderer and transform
+  /**
+   * @brief draws this mesh using the given renderer and transform
+   * @param renderer the renderer to render this model with
+   * @param position the position to render this model
+   * @param rotation the rotation to render this model with 
+   * @param scale the scale to render this model with
+   */
   void draw( Engine::Graphics::Renderer& renderer,
              const Engine::Vec3f & position,
              const Engine::Vec3f & rotation,
@@ -51,21 +62,27 @@ public:
 
 }; //Model
 
-/// @brief loads an STL model from the passed filename
-/// @param filename the path to the STL file. must end in '.stl'
-/// checks the internal cache before loading the file and only loads it if it hasn't been loaded before
+/**
+ * @brief loads an STL model from the passed filename
+ * @param filename the path to the STL file. must end in '.stl'
+ * @return a model containing the loaded STL model with a plain grey texture
+ */
 Model loadStlModel( std::string filename );
 
-/// @brief loads a cube mesh with the appropriate texture
-/// @param textFilename the path to the PNG texture. must be a PNG file
-/// checks the internal cache before loading the file and only loads it if it hasn't been loaded before
+/**
+ * @brief loads a cube mesh with the appropriate texture
+ * @param textFilename the path to the PNG texture. must be a PNG file
+ * @return a model containing a cube mesh with the loaded texture
+ */
 Model loadCube( char* textFilename );
 
-/// @brief loads an OBJ model from the passed filename
-/// @param filename the the path to the .obj file
-/// @return the model read from the file
-/// checks the internal cache before loading the file and only loads it if it hasn't been loaded before
-/// also loads any .mtl files required by the .obj file as well as any textures
+/**
+ * @brief loads an OBJ model from the passed filename
+ * @param filename the the path to the .obj file
+ * @return the obj model with any textures specified in the MTL file
+ * 
+ * also loads any .mtl files required by the .obj file as well as any textures they reference
+ */
 Model loadObjModel( std::string filename );
 
 } //Engine::Assets
