@@ -21,7 +21,7 @@ void Engine::Graphics::Texture::LoadTexture() {
     LoadTextureArray();
   }
 
-  std::cout << "dimensions (" << m_dimensions[1] << ", " << m_dimensions[0] << ")\n"
+  std::cout << "dimensions (" << m_dimensions[1] << ", " << m_dimensions[0] << ")\n";
   
   std::cout << (short) textureData[0] << " " << (short) textureData[1] << " " <<
                (short) textureData[2] << " " << (short) textureData[3] << "\n";
