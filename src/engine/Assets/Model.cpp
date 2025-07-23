@@ -36,8 +36,7 @@ Model Engine::Assets::loadStlModel( std::string filename ) {
 
   LoadedMesh mesh = loadStlMesh( filename );
   // uses a plain gray texture
-  //Engine::Graphics::ColorTexture text( { 0x77, 0x77, 0x77, 0xff } );
-  Engine::Graphics::Texture text( "Assets/daGreyPixel.png" );
+  Engine::Graphics::ColorTexture text( { 0x77, 0x77, 0x77, 0xff } );
 
   return Model( mesh, text );
 }

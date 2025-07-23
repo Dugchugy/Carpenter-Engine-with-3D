@@ -21,15 +21,13 @@ void Engine::Graphics::Texture::LoadTexture() {
     LoadTextureArray();
   }
 
-  std::cout << "dimensions (" << m_dimensions[1] << ", " << m_dimensions[0] << ")\n";
-  
-  std::cout << (short) textureData[0] << " " << (short) textureData[1] << " " <<
-               (short) textureData[2] << " " << (short) textureData[3] << "\n";
   setTextureFromSource( textureData, m_dimensions[ 0 ], m_dimensions[ 1 ] );
 
   if ( isSTBI ) {
+    std::cout << "STBI free\n";
     STBI_FREE( textureData );
   } else {
+    std::cout << "regular free\n";
     free( textureData );
   }
 }
@@ -49,7 +47,7 @@ void Engine::Graphics::Texture::setTextureFromSource( unsigned char* data, int w
 }
 
 void Engine::Graphics::Texture::LoadTextureArray() {
-  unsigned char* data;
+  void* data;
   int size;
 
   emscripten_wget_data(m_filename, (void**)&data, &size, nullptr);
@@ -57,7 +55,7 @@ void Engine::Graphics::Texture::LoadTextureArray() {
   while (data == nullptr);
 
   // Load Image
-  textureData = stbi_load_from_memory(data, size, &m_dimensions[0],
+  textureData = stbi_load_from_memory( (unsigned char*) data, size, &m_dimensions[0],
     &m_dimensions[1], nullptr, 4);
 
   free(data);
@@ -66,6 +64,8 @@ void Engine::Graphics::Texture::LoadTextureArray() {
     std::cerr << "ERROR: Failed to load image name: " << m_filename << std::endl;
     return;
   }
+
+  isSTBI = true;
 }
 
 unsigned Engine::Graphics::Texture::GetTexture() {
@@ -77,21 +77,22 @@ unsigned Engine::Graphics::Texture::GetTexture() {
 
 Engine::Graphics::ColorTexture::ColorTexture( Color c ) :
     Texture( "Color" ), color( c ) {
-  unsigned int imageSize = 1024;
 
-  textureData = (unsigned char*) malloc( ( imageSize * imageSize ) * 4 );
+  textureData = (unsigned char*) malloc( 8 );
 
-  for ( int i = 0; i < ( imageSize * imageSize ); i++ ) {
-    textureData[ 4*i ] = color.r;
-    textureData[ 4*i + 1 ] = color.g;
-    textureData[ 4*i + 2 ] = color.b;
-    textureData[ 4*i + 3 ] = color.a;
-  }
+  textureData[ 0 ] = color.r;
+  textureData[ 1 ] = color.g;
+  textureData[ 2 ] = color.b;
+  textureData[ 3 ] = color.a;
+  textureData[ 4 ] = 46;
+  textureData[ 5 ] = 0;
+  textureData[ 6 ] = 47;
+  textureData[ 7 ] = 0;
 
   isSTBI = false;
 
-  m_dimensions[ 0 ] = imageSize;
-  m_dimensions[ 1 ] = imageSize;
+  m_dimensions[ 0 ] = 1;
+  m_dimensions[ 1 ] = 1;
 }
 
 void Engine::Graphics::ColorTexture::LoadTextureArray() {}
