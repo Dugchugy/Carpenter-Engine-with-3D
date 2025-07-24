@@ -54,7 +54,8 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
 
   std::vector< Vec3f > verts;
   std::vector< TexCoords > uvs;
-  std::vector< Tri > Tris;
+  std::unordered_map< std::string, std::vector< Tri > > Tris;
+  std::vector< std::string > textureNames;
 
   Engine::Assets::AssetStream stream( filename );
   stream.open();
@@ -66,7 +67,7 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
 
   while ( line != "" ) {
 
-    if( line[0] == 'o' ) {
+    /*if( line[0] == 'o' ) {
       if ( Tris.size() > 0 ) {
         std::cout << "new object has " << Tris.size() << " tris\n";
         if ( currentText == "" ) {
@@ -81,7 +82,7 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
 
       // no need to clear verts/uvs. face indicies are global
       Tris = std::vector< Tri >();
-    }
+    }*/
 
     if ( line.length() > 6 ) {
       std::vector< std::string > lineParts = splitString( line, ' ' );
@@ -104,6 +105,8 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
 
       if ( lineParts[ 0 ] == "usemtl" ) {
         std::cout << "using mtl " << lineParts[ 1 ] << "\n";
+        Tris.insert( { lineParts[ 1 ], std::vector< Tri >() } );
+        textureNames.push_back( lineParts[ 1 ] );
         currentText = lineParts[ 1 ];
       }
     }
@@ -119,8 +122,13 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
     if( line[0] == 'f' ) {
       //std::cout << "parsing face: " << line << "\n";
       std::vector< Tri > newTris = parseFace( line, verts, uvs );
+
+      if ( !Tris.contains( currentText ) ) {
+        Tris.insert( { currentText, std::vector< Tri >() } );
+      }
+
       while ( newTris.size() > 0 ) {
-        Tris.push_back( newTris.back() );
+        Tris.at( currentText ).push_back( newTris.back() );
         newTris.pop_back();
       }
     }
@@ -131,9 +139,20 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
 
   if ( Tris.size() > 0 ) {
     std::cout << "adding last object\n";
-    std::cout << "new object has " << Tris.size() << " tris\n";
-    base.addMesh( LoadedMesh( Tris ), 
-      Engine::Graphics::Texture( "Assets/Placeholder.png" ) );
+
+    for ( int i = 0; i < textureNames.size(); i++ ) {
+      if ( Tris.contains( textureNames[ i ] ) ) {
+        std::cout << "adding mesh for mlt " << textureNames[ i ] << "\n";
+        if ( currentTextMap.contains( textureNames[ i ] ) ) {
+          base.addMesh( LoadedMesh( Tris.at( textureNames[ i ] ) ), 
+            currentTextMap.at( textureNames[ i ] ) );
+        } else {
+          std::cout << "doesn't have texture for mtl\n";
+          base.addMesh( LoadedMesh( Tris.at( textureNames[ i ] ) ), 
+            Engine::Graphics::Texture( "Assets/Placeholder.png" ) );
+        }
+      }
+    }
   }
 
   return base;

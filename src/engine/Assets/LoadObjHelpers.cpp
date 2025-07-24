@@ -217,6 +217,7 @@ std::unordered_map<std::string, Engine::Graphics::Texture>
            line[ 4 ] == 't' && line[ 5 ] == 'l' ) {
 
         if ( currentName != "" ) {
+          std::cout << "adding map entry for mtl " << currentName << "\n";
           currentDiffuse.a = currentDiffuse.a * currentOpacity;
           map.insert( { 
             currentName, 
@@ -244,6 +245,7 @@ std::unordered_map<std::string, Engine::Graphics::Texture>
   // adds the last entry to the map if needed
   if ( currentName != "" ) {
     currentDiffuse.a = currentDiffuse.a * currentOpacity;
+    std::cout << "adding map entry for mtl " << currentName << "\n";
     map.insert( { 
       currentName, 
       Engine::Graphics::ColorTexture( currentDiffuse )
