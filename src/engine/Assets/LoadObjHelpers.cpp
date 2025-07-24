@@ -225,7 +225,7 @@ std::unordered_map<std::string, Engine::Graphics::Texture>
         }
 
         currentOpacity = 0.0f;
-        currentDiffuse = Engine::color();
+        currentDiffuse = Engine::Color();
         currentName = splitString( line, ' ' )[ 1 ];
       }
 
@@ -237,6 +237,8 @@ std::unordered_map<std::string, Engine::Graphics::Texture>
         currentOpacity = stof( splitString( line, ' ' )[ 1 ] );
       }
     }
+
+    stream >> line;
   }
 
   // adds the last entry to the map if needed

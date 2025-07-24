@@ -26,7 +26,6 @@ void Model::draw( Engine::Graphics::Renderer& renderer,
                   const Engine::Vec3f & rotation,
                   const Engine::Vec3f & scale ) {
   for ( int i = 0; i < meshes.size(); i++ ) {
-    std::cout << "drawing mesh " << i << " of model\n";
     renderer.UseTexture( meshes[ i ].texture, GL_TEXTURE0 );
     renderer.DrawMesh( & ( meshes[ i ].mesh ), position, scale, rotation );
   }
@@ -75,7 +74,7 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
             Engine::Graphics::Texture( "Assets/Placeholder.png" ) );
         } else {
           base.addMesh( LoadedMesh( Tris ), 
-            currentTextMap[ currentText ] );
+            currentTextMap.at( currentText ) );
         }
       }
       std::cout << "starting object: " << line << "\n";
@@ -84,7 +83,7 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
       Tris = std::vector< Tri >();
     }
 
-    if ( line.length > 6 ) {
+    if ( line.length() > 6 ) {
       std::vector< std::string > lineParts = splitString( line, ' ' );
 
       if ( lineParts[ 0 ] == "mtllib" ) {
@@ -104,6 +103,7 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
       }
 
       if ( lineParts[ 0 ] == "usemtl" ) {
+        std::cout << "using mtl " << lineParts[ 1 ] << "\n";
         currentText = lineParts[ 1 ];
       }
     }
