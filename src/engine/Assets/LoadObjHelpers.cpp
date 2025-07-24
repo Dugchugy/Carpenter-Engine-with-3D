@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "AssetStream.hpp"
+
 using namespace Engine::Assets;
 
 Engine::Graphics::Vertex Engine::Assets::createVertex( 
@@ -190,6 +192,63 @@ Engine::Color Engine::Assets::parseDiffuse( std::string line ) {
   c.g = c.g * stof( split[ 2 ], nullptr );
   c.b = c.b * stof( split[ 3 ], nullptr );
   return c;
+}
+
+std::unordered_map<std::string, Engine::Graphics::Texture> 
+  Engine::Assets::parseMtlFile( std::string filename ) {
+  
+  Engine::Assets::AssetStream stream( filename );
+  stream.open();
+  std::string line = "";
+
+  std::string currentName = "";
+  Engine::Color currentDiffuse;
+  float currentOpacity = 0.0f;
+  stream >> line;
+
+  std::unordered_map< std::string, Engine::Graphics::Texture> map;
+
+  while( line != "" ) {
+    std::cout << "parsing line " << line << "\n";
+
+    if ( line.length() > 6 ) {
+      if ( line[ 0 ] == 'n' && line[ 1 ] == 'e' &&
+           line[ 2 ] == 'w' && line[ 3 ] == 'm' &&
+           line[ 4 ] == 't' && line[ 5 ] == 'l' ) {
+
+        if ( currentName != "" ) {
+          currentDiffuse.a = currentDiffuse.a * currentOpacity;
+          map.insert( { 
+            currentName, 
+            Engine::Graphics::ColorTexture( currentDiffuse )
+          } );
+        }
+
+        currentOpacity = 0.0f;
+        currentDiffuse = Engine::color();
+        currentName = splitString( line, ' ' )[ 1 ];
+      }
+
+      if ( line[ 0 ] == 'K' && line[ 1 ] == 'd') {
+        currentDiffuse = parseDiffuse( line );
+      }
+
+      if ( line[ 0 ] == 'd' ) {
+        currentOpacity = stof( splitString( line, ' ' )[ 1 ] );
+      }
+    }
+  }
+
+  // adds the last entry to the map if needed
+  if ( currentName != "" ) {
+    currentDiffuse.a = currentDiffuse.a * currentOpacity;
+    map.insert( { 
+      currentName, 
+      Engine::Graphics::ColorTexture( currentDiffuse )
+    } );
+  }
+
+  return map;
 }
 
 TexCoords operator+( const TexCoords & x, const TexCoords & y ) {

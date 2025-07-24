@@ -62,18 +62,50 @@ Model Engine::Assets::loadObjModel( std::string filename ) {
   std::string line = "";
   stream >> line;
 
+  std::unordered_map<std::string, Engine::Graphics::Texture> currentTextMap;
+  std::string currentText = "";
+
   while ( line != "" ) {
 
     if( line[0] == 'o' ) {
       if ( Tris.size() > 0 ) {
         std::cout << "new object has " << Tris.size() << " tris\n";
-        base.addMesh( LoadedMesh( Tris ), 
-          Engine::Graphics::Texture( "Assets/Placeholder.png" ) );
+        if ( currentText == "" ) {
+          base.addMesh( LoadedMesh( Tris ), 
+            Engine::Graphics::Texture( "Assets/Placeholder.png" ) );
+        } else {
+          base.addMesh( LoadedMesh( Tris ), 
+            currentTextMap[ currentText ] );
+        }
       }
       std::cout << "starting object: " << line << "\n";
 
       // no need to clear verts/uvs. face indicies are global
       Tris = std::vector< Tri >();
+    }
+
+    if ( line.length > 6 ) {
+      std::vector< std::string > lineParts = splitString( line, ' ' );
+
+      if ( lineParts[ 0 ] == "mtllib" ) {
+
+        std::vector< std::string > fileNameParts = splitString( filename, '/' );
+        fileNameParts.pop_back();
+        std::string mtlFileName = "";
+        for ( int i = 0; i < fileNameParts.size(); i++ ) {
+          if ( i > 0 ) {
+            mtlFileName += "/";
+          }
+          mtlFileName += fileNameParts[ i ];
+        }
+        mtlFileName += "/" + lineParts[ 1 ];
+
+        currentTextMap = parseMtlFile( mtlFileName );
+      }
+
+      if ( lineParts[ 0 ] == "usemtl" ) {
+        currentText = lineParts[ 1 ];
+      }
     }
 
     if( line[0] == 'v' && line[1] == ' ' ) {
