@@ -208,7 +208,7 @@ std::unordered_map<std::string, Engine::Graphics::Texture>
 
   std::unordered_map< std::string, Engine::Graphics::Texture> map;
 
-  while( line != "" ) {
+  while( !stream.isEmpty() ) {
     std::cout << "parsing line " << line << "\n";
 
     if ( line.length() > 6 ) {

@@ -78,6 +78,12 @@ public:
   std::string readUntil( char end );
 
   /**
+   * @brief checks if there are any more bytes to read in the stream
+   * @return true if there are no more bytes to read
+   */
+  bool isEmpty();
+
+  /**
    * @brief Extraction operator for floats
    * @param x The float to write the data into.
    * @returns A reference to the AssetStream so extractions can be chained

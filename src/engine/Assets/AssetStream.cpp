@@ -100,12 +100,16 @@ std::string AssetStream::readUntil( char end ) {
   char c;
   *this >> c;
 
-  while ( ( c != end ) && ( _position < ( _size - 1 ) ) ) {
+  while ( ( c != end ) && ( !isEmpty() ) ) {
     result = result + c;
     *this >> c;
   }
 
   return result;
+}
+
+bool AssetStream::isEmpty() {
+  return _position >= _size;
 }
 
 AssetStream& AssetStream::operator>>( float& x ) {
