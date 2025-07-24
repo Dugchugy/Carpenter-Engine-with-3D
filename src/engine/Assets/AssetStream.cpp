@@ -97,6 +97,11 @@ std::string AssetStream::readUntil( char end ) {
   
   std::string result = "";
 
+  if ( isEmpty() ) {
+    // early return if stream is empty
+    return result;
+  }
+
   char c;
   *this >> c;
 

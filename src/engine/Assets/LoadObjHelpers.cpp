@@ -182,7 +182,7 @@ std::vector<Tri> Engine::Assets::parseFace( std::string & line, const std::vecto
 Engine::Color Engine::Assets::parseDiffuse( std::string line ) {
   std::vector<std::string> split = splitString( line, ' ' );
 
-  if ( split.size() != 4 || split[ 0 ] != "kd" ) {
+  if ( split.size() != 4 || split[ 0 ] != "Kd" ) {
     std::cout << "invalid line " << line << "\n";
     throw InvalidLineException();
   }
